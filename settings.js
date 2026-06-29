@@ -65,6 +65,8 @@ profileForm.addEventListener("submit", (event) => {
         currency: currencyObj[currencyUpdate]
     }]))
 
+    alert("Save Changes")
+
     settingsUI()
     
 })
