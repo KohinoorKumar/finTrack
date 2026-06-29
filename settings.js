@@ -17,20 +17,23 @@ const currencyObj = {
 }
 
 
-let users = JSON.parse(localStorage.getItem("users"))
+function settingsUI() {
+    let users = JSON.parse(localStorage.getItem("users"))
 
-users.forEach((element) => {
-    profileForm[0].value = element.username
+    users.forEach((element) => {
+        profileForm[0].value = element.username
+    
+        let matchedKey = Object.keys(currencyObj).find(key => currencyObj[key] === element.currency);
+    
+        profileForm[1].value = matchedKey
+    
+        username.innerText = element.username
+    
+        // console.log(profileForm[1].value)
+    });
+}
 
-    let matchedKey = Object.keys(currencyObj).find(key => currencyObj[key] === element.currency);
-
-    profileForm[1].value = matchedKey
-
-    username.innerText = element.username
-
-    // console.log(profileForm[1].value)
-
-});
+settingsUI()
 
 
 function applyTheme(theme = localStorage.getItem("theme") || "light") {
@@ -43,7 +46,7 @@ function applyTheme(theme = localStorage.getItem("theme") || "light") {
     leftDiv.classList.toggle("light-gray", isDark)
 
     if(addBtn){
-        addBtn.style.backgroundColor = isDark ? "#3b82f6" : "#000"
+        addBtn.style.backgroundColor = isDark? "#3b82f6" : "#000"
     }
 }
 
