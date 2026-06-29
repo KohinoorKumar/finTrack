@@ -6,6 +6,7 @@ const nav = document.querySelector("nav")
 const leftDiv = document.querySelector(".left-container")
 const username = document.querySelector("#username")
 const addBtn = document.querySelector("#add-transaction")
+const logoutBtn = document.querySelector(".logout-btn")
 
 const currencyObj = {
     usd: "$",
@@ -61,6 +62,15 @@ profileForm.addEventListener("submit", (event) => {
         currency: currencyObj[currencyUpdate]
     }]))
 })
-
-
 applyTheme()
+
+logoutBtn.addEventListener("click", () => {
+    let confirmation = confirm("Are you sure you want to Logout.")
+    if(confirmation){
+        let token = localStorage.getItem("user-token")
+        localStorage.setItem("user-token", JSON.stringify([{
+            token: ""
+        }]))
+        window.location.href = "./loginPage.html"
+    }
+})
