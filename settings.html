@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet"
+/>
+</head>
+<body>
+    <main>
+        <div class="left-container">
+            <div class="top">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="ri-stack-fill"></i>
+                    </div>
+                    <div class="logo-name">
+                        <h1>FinTrack Pro</h1>
+                        <p>Enterprise Finance</p>
+                    </div>
+                </div>
+                <button class="link"> <i class="ri-dashboard-fill"></i><a href="./dashboard.html">DashBoard</a></button>
+                <button class="link"><i class="ri-settings-4-fill"></i><a href="./settings.html">Settings</a></button>
+            </div>
+            <div class="bottom">
+                <button id="add-transaction"><i class="ri-add-line"></i> Add Transaction</button>
+            </div>
+
+        </div>
+        <div class="right-container">
+            <nav>
+                <h4 id="username">Username</h4>
+                <button class="logout-btn"><i class="ri-logout-box-r-fill"></i>Logout</button>
+            </nav>
+
+            <div class="settings">
+                <h1>Settings</h1>
+                <p>Manage your account profile and app formatting.</p>
+
+                <div class="profile-detail">
+                    <h1>Profile Details</h1>
+                    <form class="profile-form">
+                        <div class="input-fields">
+                            <div class="name-update">
+                                <label for="name" >Full Name</label>
+                                <input type="text" name="name" placeholder="username" id="update-user">
+                            </div>
+                            <div class="currency-update">
+                                <label for="currency">Primary Currency</label>
+                                <select name="current" id="update-currency">
+                                    <option value="usd" selected>USD ($)</option>
+                                    <option value="eur">EUR (€)</option>
+                                    <option value="gbp">GBP (£)</option>
+                                    <option value="inr">INR (₹)</option>
+                                    <option value="jpy">JPY (¥)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button id="save-changes" type="submit">Save Changes</button>
+                    </form>
+                </div>
+
+            </div>
+           
+        </div>
+
+        
+
+
+        <div class="form-div">
+            <form id="Transaction-form">
+                <div id="form-title">
+                    <h2>Add Transaction</h2>
+                    <h4 class="cancel">X</h4>
+                </div>
+                <label for="type">Type</label>
+                <select name="type" id="type">
+                    <option value="income">Income</option>
+                    <option value="expense" selected>Expense</option>
+                </select>
+                <label for="description">Description</label>
+                <input type="text" name="description" placeholder="e.g. Amazon, Salary, Coffee" required>
+
+                <div class="amount-field">
+                    <div class="left-field">
+                        <label for="amount">Amount</label>
+                        <input type="number" name="amount" id="" required placeholder="e.g. 35000">
+                    </div>
+                    <div class="right-field">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="my-date" required>
+                    </div>
+                </div>
+
+                <label for="category">Category</label>
+                <select name="category" id="category" required>
+                    <option value="select" selected disabled>Select a category</option>
+                    <option value="food">Food & Dining</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="bill">Recharge & Bill</option>
+                    <option value="petrol">Petrol & Auto</option>
+                    <option value="Utility">Utility</option>
+                    <option value="salary">Salary</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="others">Others</option>
+                </select>
+                <button type="submit" class="black">Save Transaction</button>
+            </form>
+        </div>
+
+    </main>
+    <!-- <script src="./dashboard.js"></script> -->
+    <script src="./settings.js"></script>
+</body>
+</html>
