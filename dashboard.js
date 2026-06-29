@@ -268,7 +268,7 @@ const renderTransactionData = (list = transactionsArr) => {
     let users = localStorage.getItem("users")
 
     list.forEach((elem) => {
-        renderTransaction(elem.id, elem.date, elem.description, elem.type, elem.amount, users)
+        renderTransaction(elem.id, elem.date, elem.type, elem.description, elem.category, elem.amount, users)
     })
 
     updateFinancial(list)
