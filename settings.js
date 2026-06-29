@@ -64,6 +64,9 @@ profileForm.addEventListener("submit", (event) => {
         username: userUpdate,
         currency: currencyObj[currencyUpdate]
     }]))
+
+    settingsUI()
+    
 })
 applyTheme()
 
