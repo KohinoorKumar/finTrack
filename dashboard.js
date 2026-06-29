@@ -131,7 +131,7 @@ function applyTheme(theme = localStorage.getItem("theme") || "light") {
     }
 }
 
-function updateFinancial(list = transactionsArr) {
+function updateFinancial(list = transactionsArr, users) {
     let currentBalanceValue = 0
     let totalIncomeValue = 0
     let totalExpenseValue = 0
@@ -148,10 +148,15 @@ function updateFinancial(list = transactionsArr) {
 
     currentBalanceValue = totalIncomeValue - totalExpenseValue
 
-    currentBalance.innerText = `$${currentBalanceValue.toFixed(2)}
+    const currency = users?.[0]?.currency || "$"
+
+    console.log(currency);
+    
+
+    currentBalance.innerText = `${currency}${currentBalanceValue.toFixed(2)}
     `
-    totalIncome.innerText = `$${totalIncomeValue.toFixed(2)}`
-    totalExpense.innerText = `$${totalExpenseValue.toFixed(2)}`
+    totalIncome.innerText = `${currency}${totalIncomeValue.toFixed(2)}`
+    totalExpense.innerText = `${currency}${totalExpenseValue.toFixed(2)}`
     totalTransactions.innerText = count
 
     updateChartData(totalIncomeValue, totalExpenseValue)
@@ -191,11 +196,6 @@ function renderTransaction(id, date, type, description, category, amount, users)
     categoryText.style.textTransform = "capitalize"
     
 
-    // const theme = localStorage.getItem("theme")
-    // if (theme === "dark"){
-    //     categoryText.style.background = "#111827"
-    // }
-
 
     const currency = users?.[0]?.currency || "$"
     amountText.innerHTML = `${currency}${amount}`
@@ -234,8 +234,9 @@ function renderTransaction(id, date, type, description, category, amount, users)
 
         transactionEdit = transactionsArr.findIndex((transaction) => transaction.id === Number(div.dataset.id))
         updateChartData()
-        updateFinancial()
+        // updateFinancial()
     })
+
 
     deleteBtn.addEventListener("click", (event) => {
         event.stopPropagation()
@@ -243,9 +244,8 @@ function renderTransaction(id, date, type, description, category, amount, users)
         if (index !== -1) {
             transactionsArr.splice(index, 1)
             localStorage.setItem("transactions", JSON.stringify(transactionsArr))
-            updateChartData()
             updateUI()
-            updateFinancial()
+            updateChartData()
         }
     })
 }
@@ -256,11 +256,6 @@ const renderTransactionData = (list = transactionsArr) => {
         const msg = document.createElement('p')
         msg.classList.add('no-results')
         msg.innerText = 'No tasks found'
-        // if(main.getAttribute('data-mode') === 'day'){
-        //     msg.style.color = 'black'
-        // }else{
-        //     msg.style.color = 'white'
-        // }
         transactionsList.append(msg)
         return
     }
@@ -271,7 +266,7 @@ const renderTransactionData = (list = transactionsArr) => {
         renderTransaction(elem.id, elem.date, elem.type, elem.description, elem.category, elem.amount, users)
     })
 
-    updateFinancial(list)
+    updateFinancial(list, users)
 
 }
 
@@ -286,11 +281,11 @@ function updateUI() {
     transactionsArr.length = 0
     transactionsArr.push(...transactions)
 
-    if (transactionsList) {
+    if(transactionsList) {
         transactionsList.innerHTML = ""
     }
 
-    let res = updateFinancial(transactionsArr)
+    updateFinancial(transactionsArr, users)
     // updateChartData(res.totalIncomeValue, res.totalExpenseValue)
 
     transactionsArr.forEach((transaction) => {
@@ -318,21 +313,21 @@ function selectTransactions(selectedValue){
         }
     })
 
+    console.log(selection)
+
     renderTransactionData(selection)
 }
 
 // updateUI and theme
 
-
-
 let token = JSON.parse(localStorage.getItem("user-token"))
+
 if(token[0].token === "" || token[0].token === null ){
     window.location.href = "./loginPage.html"
 } else {
     updateUI()
     applyTheme(localStorage.getItem("theme") || "light")
 }
-
 
 // Event Listeners
 
@@ -387,7 +382,6 @@ transactionForm.addEventListener("submit", (evt) => {
     localStorage.setItem("transactions", JSON.stringify(transactionsArr))
 
     updateUI()
-    updateFinancial()
 
     resetForm()
 })
