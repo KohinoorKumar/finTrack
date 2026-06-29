@@ -84,6 +84,7 @@ const myChart = new Chart(ctx, {
 function updateChartData(income = 0, expense = 0) {
     myChart.data.datasets[0].data = [income]
     myChart.data.datasets[1].data = [expense]
+    myChart.update()
 }
 
 function applyTheme(theme = localStorage.getItem("theme") || "light") {
