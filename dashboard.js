@@ -296,8 +296,7 @@ function updateUI() {
 
 function searchTransactions(query){
     const filteredTransactions = transactionsArr.filter((transaction) => {
-       return transaction.type.toLowerCase().includes(query) || transaction.description.toLowerCase().includes(query) ||
-       transaction.date.toLowerCase().includes(query)
+       return transaction.type.toLowerCase().includes(query) || transaction.description.toLowerCase().includes(query) || transaction.category.toLowerCase().includes(query) || transaction.date.toLowerCase().includes(query)
     })
     renderTransactionData(filteredTransactions)
 }
